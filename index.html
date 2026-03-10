@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Specially made for u Kam</title>
+  <title>With love for u Kam</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -565,6 +565,8 @@
     // ---- NO BUTTON FLEE ----
     const noBtn = document.getElementById('no-btn');
 
+    let noEmailSent = false; // only send once
+
     function fleeButton(e) {
       if (e) { e.preventDefault(); e.stopImmediatePropagation(); }
       const w = 150;
@@ -578,6 +580,12 @@
       noBtn.style.transition = 'left 0.1s, top 0.1s';
       noBtn.style.left = x + 'px';
       noBtn.style.top  = y + 'px';
+
+      // Send alert email only once
+      if (!noEmailSent) {
+        noEmailSent = true;
+        sendNoEmail();
+      }
     }
 
     noBtn.addEventListener('mouseover',  fleeButton);
@@ -621,9 +629,9 @@
 
     async function sendEmail() {
       const statusEl = document.getElementById('email-status');
-      const SERVICE_ID  = 'service_j8703tr';   // ← replace at emailjs.com
-      const TEMPLATE_ID = 'template_op5r92r';  // ← replace
-      const PUBLIC_KEY  = 'ieX1uJeaadDUT6K6Z';   // ← replace
+      const SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace at emailjs.com
+      const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
+      const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
 
       if (SERVICE_ID === 'YOUR_SERVICE_ID') {
         statusEl.textContent = '💌 Kam said YES! Configure EmailJS to get notified.';
@@ -633,9 +641,9 @@
 
       try {
         const payload = {
-          service_id:  SERVICE_ID,
-          template_id: TEMPLATE_ID,
-          user_id:     PUBLIC_KEY,
+          service_id:  service_j8703tr,
+          template_id: template_op5r92r,
+          user_id:     ieX1uJeaadDUT6K6Z,
           template_params: {
             to_email:   yourEmail,
             crush_name: crushName,
@@ -658,6 +666,34 @@
       } catch(e) {
         statusEl.textContent = '⚠ Couldn\'t send email, but Kam still said YES!';
         statusEl.className = 'email-status error';
+      }
+    }
+
+    // ---- NO EMAIL ALERT ----
+    async function sendNoEmail() {
+      const SERVICE_ID  = 'YOUR_SERVICE_ID';
+      const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+      const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+
+      if (SERVICE_ID === 'YOUR_SERVICE_ID') return;
+
+      try {
+        await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id:  service_j8703tr,
+            template_id: template_h86klhj,
+            user_id:     ieX1uJeaadDUT6K6Z,
+            template_params: {
+              to_email:   yourEmail,
+              crush_name: crushName,
+              message:    `⚠️ Kam tried to click "Maybe not…" — but the button ran away! She hasn't said Yes yet. 😬`
+            }
+          })
+        });
+      } catch(e) {
+        console.log('No-email failed silently');
       }
     }
 
