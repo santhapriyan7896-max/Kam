@@ -310,20 +310,7 @@
       50%       { opacity: 1; transform: scale(1); }
     }
 
-    /* Shooting sparkles */
-    .sparkle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 102;
-      font-size: 1.2rem;
-      animation: sparkleFly linear forwards;
-      opacity: 0;
-    }
-    @keyframes sparkleFly {
-      0%   { opacity: 0; transform: translate(0,0) scale(0.5) rotate(0deg); }
-      20%  { opacity: 1; }
-      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(var(--rot)); }
-    }
+
 
     .yes-content {
       position: relative;
@@ -541,12 +528,13 @@
         You are not just someone I admire, Kam.<br/>
         You are the feeling I get when I stand before<br/>
         a painting that takes my breath away.<br/><br/>
-        So here I am, with my whole heart, asking —
+        So here I am, with my whole heart, asking you that,<br/>
+        Can we paint a story together ???
       </p>
 
       <div class="buttons">
         <button class="btn btn-yes" id="yes-btn" onclick="handleYes()">
-          🎨 Yes, let's paint a story together
+          🎨 Yes we can paint a story together
         </button>
         <div class="btn btn-no" id="no-btn">
           Maybe not…
@@ -559,7 +547,7 @@
   <div id="yes-screen">
     <div class="yes-content">
 
-      <p class="yes-title" id="yes-title">You just made<br/>someone's world.</p>
+
       <div class="yes-divider"></div>
       <p class="yes-subtitle" id="yes-message">
         Somewhere out there, a heart is racing right now.
@@ -602,7 +590,6 @@
     // ---- YES HANDLER ----
     function handleYes() {
       document.getElementById('yes-screen').classList.add('active');
-      spawnConfetti();
       spawnPetals();
       sendEmail();
     }
@@ -629,29 +616,7 @@
         screen.appendChild(star);
       }
 
-      // Shooting sparkles bursting from center
-      const sparkleEmojis = ['✨','⭐','💫','🌟','✦','✧'];
-      for (let i = 0; i < 30; i++) {
-        setTimeout(() => {
-          const el = document.createElement('div');
-          el.className = 'sparkle';
-          el.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
-          const angle = Math.random() * 360;
-          const dist  = 120 + Math.random() * 250;
-          const dx = Math.cos(angle * Math.PI / 180) * dist;
-          const dy = Math.sin(angle * Math.PI / 180) * dist;
-          el.style.cssText = `
-            left: calc(50vw + ${(Math.random()-0.5)*60}px);
-            top:  calc(40vh + ${(Math.random()-0.5)*60}px);
-            font-size: ${0.8 + Math.random() * 1.4}rem;
-            --dx: ${dx}px; --dy: ${dy}px;
-            --rot: ${Math.random()*360}deg;
-            animation-duration: ${1.5 + Math.random() * 2}s;
-            animation-delay: ${Math.random() * 1.5}s;
-          `;
-          screen.appendChild(el);
-        }, i * 80);
-      }
+      // Twinkling background stars only
     }
 
     async function sendEmail() {
