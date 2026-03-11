@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>With love for u Kam</title>
+  <title>With love for Kam ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -629,21 +629,15 @@
 
     async function sendEmail() {
       const statusEl = document.getElementById('email-status');
-      const SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace at emailjs.com
-      const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
-      const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // ← replace
-
-      if (SERVICE_ID === 'YOUR_SERVICE_ID') {
-        statusEl.textContent = '💌 Kam said YES! Configure EmailJS to get notified.';
-        statusEl.className = 'email-status sent';
-        return;
-      }
+      const SERVICE_ID  = 'service_j8703tr';
+      const TEMPLATE_ID = 'template_op5r92r';
+      const PUBLIC_KEY  = 'ieX1uJeaadDUT6K6Z';
 
       try {
         const payload = {
-          service_id:  service_j8703tr,
-          template_id: template_op5r92r,
-          user_id:     ieX1uJeaadDUT6K6Z,
+          service_id:  SERVICE_ID,
+          template_id: TEMPLATE_ID,
+          user_id:     PUBLIC_KEY,
           template_params: {
             to_email:   yourEmail,
             crush_name: crushName,
@@ -658,7 +652,7 @@
         });
 
         if (res.ok) {
-          statusEl.textContent = '✉ Email sent to santhapriyan7896@gmail.com 🎉';
+          statusEl.textContent = '✉ Email sent! 🎉';
           statusEl.className = 'email-status sent';
         } else {
           throw new Error('send failed');
@@ -669,22 +663,19 @@
       }
     }
 
-    // ---- NO EMAIL ALERT ----
     async function sendNoEmail() {
-      const SERVICE_ID  = 'YOUR_SERVICE_ID';
-      const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-      const PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-
-      if (SERVICE_ID === 'YOUR_SERVICE_ID') return;
+      const SERVICE_ID  = 'service_j8703tr';
+      const TEMPLATE_ID = 'template_h86klhj';
+      const PUBLIC_KEY  = 'ieX1uJeaadDUT6K6Z';
 
       try {
         await fetch('https://api.emailjs.com/api/v1.0/email/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            service_id:  service_j8703tr,
-            template_id: template_h86klhj,
-            user_id:     ieX1uJeaadDUT6K6Z,
+            service_id:  SERVICE_ID,
+            template_id: TEMPLATE_ID,
+            user_id:     PUBLIC_KEY,
             template_params: {
               to_email:   yourEmail,
               crush_name: crushName,
